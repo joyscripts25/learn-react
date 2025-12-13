@@ -7,6 +7,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
   globalIgnores(['dist']),
+  reactHooks.configs.flat.recommended,
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
