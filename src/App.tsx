@@ -1,13 +1,22 @@
-export default function FeedbackForm() {
-  function handleClick() {
-    const name = prompt('What is your name?');
+import { useEffect, useState } from 'react';
+import Clock from './Clock';
 
-    if (name === null || name.trim() === '') {
-      alert('이름을 입력해주세요');
-      return;
-    }
-    alert(`Hello, ${name}!`);
-  }
+function useTime() {
+  const [time, setTime] = useState(() => new Date());
 
-  return <button onClick={handleClick}>Greet</button>;
+  useEffect(() => {
+    const id = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
+
+export default function App() {
+  const time = useTime();
+
+  return (
+    <Clock time={time.toLocaleTimeString()} />
+  )
 }
